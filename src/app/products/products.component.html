@@ -1,0 +1,21 @@
+<div>
+  <button (click)="loadProducts()">Load Products</button>
+</div>
+<div>
+  <ng-container *ngIf="products$ | async as state" [ngSwitch]="state.loading">
+    <ng-container *ngSwitchCase="true">
+      <p>loading</p>
+    </ng-container>
+    <ng-container *ngSwitchCase="false">
+      <ng-container [ngSwitch]="state.loaded">
+        <ng-container *ngSwitchCase="true">
+          <app-products-list (onSelectProduct)="getProductByID($event)" (onDeleteProduct)="deleteProductById($event)" [products]="state.products"></app-products-list>
+        </ng-container>
+        <ng-container *ngSwitchCase="false">
+          <p>{{state.error}}</p>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+
+  </ng-container>
+</div>
