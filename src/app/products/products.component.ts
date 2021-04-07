@@ -17,7 +17,6 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.products$ = this.store.pipe(
-      tap(data => console.log({'products$': data})),
       map(
         state => state.products
       )
